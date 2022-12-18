@@ -55,7 +55,7 @@
 #        define RGB_MATRIX_USE_LIMITS(min, max)                                                   \
             uint8_t min = RGB_MATRIX_LED_PROCESS_LIMIT * params->iter;                            \
             uint8_t max = min + RGB_MATRIX_LED_PROCESS_LIMIT;                                     \
-            if (max > RGB_MATRIX_LED_COUNT) max = RGB_MATRIX_LED_COUNT;                                   \
+            if (max > RGB_MATRIX_LED_COUNT) max = RGB_MATRIX_LED_COUNT;                           \
             uint8_t k_rgb_matrix_split[2] = RGB_MATRIX_SPLIT;                                     \
             if (is_keyboard_left() && (max > k_rgb_matrix_split[0])) max = k_rgb_matrix_split[0]; \
             if (!(is_keyboard_left()) && (min < k_rgb_matrix_split[0])) min = k_rgb_matrix_split[0];
@@ -69,7 +69,7 @@
 #    if defined(RGB_MATRIX_SPLIT)
 #        define RGB_MATRIX_USE_LIMITS(min, max)                                                   \
             uint8_t       min                   = 0;                                              \
-            uint8_t       max                   = RGB_MATRIX_LED_COUNT;                               \
+            uint8_t       max                   = RGB_MATRIX_LED_COUNT;                           \
             const uint8_t k_rgb_matrix_split[2] = RGB_MATRIX_SPLIT;                               \
             if (is_keyboard_left() && (max > k_rgb_matrix_split[0])) max = k_rgb_matrix_split[0]; \
             if (!(is_keyboard_left()) && (min < k_rgb_matrix_split[0])) min = k_rgb_matrix_split[0];
@@ -81,7 +81,7 @@
 #endif
 
 #define RGB_MATRIX_INDICATOR_SET_COLOR(i, r, g, b) \
-    if (i >= led_min && i <= led_max) {            \
+    if (i >= led_min && i < led_max) {             \
         rgb_matrix_set_color(i, r, g, b);          \
     }
 
@@ -129,12 +129,12 @@ void rgb_matrix_task(void);
 // This runs after another backlight effect and replaces
 // colors already set
 void rgb_matrix_indicators(void);
-void rgb_matrix_indicators_kb(void);
-void rgb_matrix_indicators_user(void);
+bool rgb_matrix_indicators_kb(void);
+bool rgb_matrix_indicators_user(void);
 
 void rgb_matrix_indicators_advanced(effect_params_t *params);
-void rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max);
-void rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max);
+bool rgb_matrix_indicators_advanced_kb(uint8_t led_min, uint8_t led_max);
+bool rgb_matrix_indicators_advanced_user(uint8_t led_min, uint8_t led_max);
 
 void rgb_matrix_init(void);
 
@@ -182,8 +182,8 @@ void        rgb_matrix_increase_speed_noeeprom(void);
 void        rgb_matrix_decrease_speed(void);
 void        rgb_matrix_decrease_speed_noeeprom(void);
 led_flags_t rgb_matrix_get_flags(void);
-led_flags_t rgb_matrix_get_flags_noeeprom(void);
 void        rgb_matrix_set_flags(led_flags_t flags);
+void        rgb_matrix_set_flags_noeeprom(led_flags_t flags);
 
 #ifndef RGBLIGHT_ENABLE
 #    define eeconfig_update_rgblight_current eeconfig_update_rgb_matrix
@@ -263,9 +263,4 @@ extern last_hit_t g_last_hit_tracker;
 #endif
 #ifdef RGB_MATRIX_FRAMEBUFFER_EFFECTS
 extern uint8_t g_rgb_frame_buffer[MATRIX_ROWS][MATRIX_COLS];
-#endif
-
-#if !defined(RGB_MATRIX_MAXIMUM_BRIGHTNESS) || RGB_MATRIX_MAXIMUM_BRIGHTNESS > UINT8_MAX
-#    undef RGB_MATRIX_MAXIMUM_BRIGHTNESS
-#    define RGB_MATRIX_MAXIMUM_BRIGHTNESS UINT8_MAX
 #endif

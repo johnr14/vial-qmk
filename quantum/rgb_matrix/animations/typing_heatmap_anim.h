@@ -1,5 +1,4 @@
 #if defined(RGB_MATRIX_FRAMEBUFFER_EFFECTS) && defined(ENABLE_RGB_MATRIX_TYPING_HEATMAP)
-#define RGB_MATRIX_EFFECT_TYPING_HEATMAP
 RGB_MATRIX_EFFECT(TYPING_HEATMAP)
 #    ifdef RGB_MATRIX_CUSTOM_EFFECT_IMPLS
 
@@ -30,7 +29,7 @@ void process_rgb_matrix_typing_heatmap(uint8_t row, uint8_t col) {
             if (i_row == row && i_col == col) {
                 g_rgb_frame_buffer[row][col] = qadd8(g_rgb_frame_buffer[row][col], 32);
             } else {
-#            define LED_DISTANCE(led_a, led_b) sqrt16(((int8_t)(led_a.x - led_b.x) * (int8_t)(led_a.x - led_b.x)) + ((int8_t)(led_a.y - led_b.y) * (int8_t)(led_a.y - led_b.y)))
+#            define LED_DISTANCE(led_a, led_b) sqrt16(((int16_t)(led_a.x - led_b.x) * (int16_t)(led_a.x - led_b.x)) + ((int16_t)(led_a.y - led_b.y) * (int16_t)(led_a.y - led_b.y)))
                 uint8_t distance = LED_DISTANCE(g_led_config.point[g_led_config.matrix_co[row][col]], g_led_config.point[g_led_config.matrix_co[i_row][i_col]]);
 #            undef LED_DISTANCE
                 if (distance <= RGB_MATRIX_TYPING_HEATMAP_SPREAD) {
