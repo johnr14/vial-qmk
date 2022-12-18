@@ -19,7 +19,7 @@ AUDIO_ENABLE = no           # Audio output
 DIP_SWITCH_ENABLE = yes
 RGB_MATRIX_ENABLE = yes
 RGB_MATRIX_DRIVER = CKLED2001
-LTO_ENABLE = yes
+#LTO_ENABLE = yes #gives warning : warning: using serial compilation of 2 LTRANS jobs
 EEPROM_DRIVER = wear_leveling
 WEAR_LEVELING_DRIVER = embedded_flash
 

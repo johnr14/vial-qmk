@@ -6,6 +6,9 @@
 
 #define VIALRGB_PROTOCOL_VERSION 1
 
+// fix bug that happens if not devined ?
+#define RGB_MATRIX_DEFAULT_VAL RGB_MATRIX_MAXIMUM_BRIGHTNESS  // Sets the default brightness value, if none has been set
+
 /* Start at 0x40 in order to not conflict with existing "enum via_lighting_value",
    even though they likely wouldn't be enabled together with vialrgb */
 enum {
