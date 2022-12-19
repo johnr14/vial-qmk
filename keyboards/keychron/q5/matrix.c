@@ -19,7 +19,7 @@
 
 // Pin connected to DS of 74HC595
 #define DATA_PIN C15
-// Pin connected to SH_CP of 74HC595
+// Pin connected to SH_CP of 74HC595o
 #define CLOCK_PIN A1
 // Pin connected to ST_CP of 74HC595
 #define LATCH_PIN A0
