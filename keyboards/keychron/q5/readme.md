@@ -1,22 +1,18 @@
-# Keychron Q3
+# Keychron Q5
 
-A customizable 80% keyboard.
+A customizable 96% keyboard.
 
 * Keyboard Maintainer: [Keychron](https://github.com/keychron)
-* Hardware Supported: Keychron Q3
+* Hardware Supported: Keychron Q5
 * Hardware Availability: [Keychron](https://www.keychron.com)
 
 Make example for this keyboard (after setting up your build environment):
 
-```
-  make keychron/q3/ansi:default
-```
+  make keychron/q5/ansi:default
 
 Flashing example for this keyboard:
 
-```
-  make keychron/q3/ansi:default:flash
-```
+  make keychron/q5/ansi:default:flash
 
 **Reset Key**: Hold down the key located at *K00*, commonly programmed as *Esc* while plugging in the keyboard.
 
