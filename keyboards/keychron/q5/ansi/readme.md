@@ -1,1 +1,1 @@
-# The ANSI variant of the Keychron Q3
+# The ANSI variant of the Keychron Q5
